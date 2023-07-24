@@ -39,10 +39,10 @@ module.exports.dashboard = async (req, res) => {
         let user_dates = await user.find({active:true});
         let user_objs = new Map();
         user_dates.forEach(element => {
-            var date = element.createAt.slice(0, 9);
+            var date = element.createAt.slice(0, 8);
             var sum = 0;
             user_dates.forEach(element => {
-                let com_date = element.createAt.slice(0, 9);
+                let com_date = element.createAt.slice(0, 8);
                 if (date == com_date) {
                     sum++;
                 }
@@ -51,6 +51,7 @@ module.exports.dashboard = async (req, res) => {
         });
         var user_keys = []; user_objs.forEach((value, key, map) => { user_keys.push(key); });
         var user_values = []; user_objs.forEach((value, key, map) => { user_values.push(value); });
+       
         res.render('admin_panel/dashboard',
             {
                 order_data,

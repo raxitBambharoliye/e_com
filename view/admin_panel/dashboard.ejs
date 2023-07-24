@@ -220,10 +220,12 @@
 
     </script>
     <script>
-      var keys = "<%=sales_keys%>";
+      var keys = "<%=user_keys%>";
+      console.log(keys);
       var keys_array = keys.split(",");
 
-      var values = "<%=sales_values%>";
+      var values = "<%=user_values%>";
+      console.log(values);
       var values_array = values.split(",");
       var options = {
         chart: {
@@ -244,30 +246,9 @@
           data: values_array
         }],
         xaxis: {
-
           categories: keys_array
         },
-        dataLabels: {
-          style: {
-            colors: ['#000000']
-          }
-        }, markers: {
-          colors: ['#000000']
-        }, subtitle: {
-          text: undefined,
-          align: 'left',
-          margin: 10,
-          offsetX: 0,
-          offsetY: 0,
-          floating: false,
-          style: {
-            fontSize: '12px',
-            fontWeight: 'normal',
-            fontFamily: undefined,
-            color: '#000000'
-          },
-        }
-
+       
       }
 
       var chart = new ApexCharts(document.querySelector("#user_chart"), options);

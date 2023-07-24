@@ -39,7 +39,7 @@ module.exports.index = async (req, res) => {
 
         var cart_count = 0;
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).limit(6).sort({ _id: -1 }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending' }).limit(6).sort({ _id: -1 }).countDocuments();
         }
         return res.render('user/index', {
             category: cat_data,
@@ -65,7 +65,7 @@ module.exports.all_product = async (req, res) => {
         let brand_data = await brand.find({ active: true });
         var cart_count = 0;
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending'}).countDocuments();
         }
 
         let page = 1;
@@ -137,7 +137,7 @@ module.exports.product = async (req, res) => {
         let ex_data = await ex_cat.find({ active: true });
         var cart_count = 0;
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending' }).countDocuments();
         }
 
         let search = '';
@@ -206,7 +206,7 @@ module.exports.single_product = async (req, res) => {
 
         var cart_count = 0;
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id , status:'pending'}).countDocuments();
         }
 
         let search = '';
@@ -268,7 +268,7 @@ module.exports.product_cat = async (req, res) => {
         let search = '';
 
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending' }).countDocuments();
         }
 
         if (req.query.search) {
@@ -362,7 +362,7 @@ module.exports.cart_page = async (req, res) => {
 
 module.exports.add_cart = async (req, res) => {
     try {
-        let check = await cart.find({ product_id: req.body.product_id, user_id: req.user.id });
+        let check = await cart.find({ product_id: req.body.product_id, user_id: req.user.id ,status:'pending'});
         if (check.length < 1) {
             req.body.user_id = req.user.id;
             req.body.active = true;
@@ -418,7 +418,7 @@ module.exports.check_out_page = async (req, res) => {
 
         var cart_count = 0;
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending' }).countDocuments();
         }
         return res.render('user/check_out', {
             category: cat_data,
@@ -522,7 +522,7 @@ module.exports.order_page = async (req, res) => {
         }
 
         if (req.user) {
-            cart_count = await cart.find({ user_id: req.user.id }).countDocuments();
+            cart_count = await cart.find({ user_id: req.user.id ,status:'pending'}).countDocuments();
         }
 
 
