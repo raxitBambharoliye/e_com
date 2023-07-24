@@ -1,0 +1,19 @@
+<form action="">
+    <div class="input-group">
+        <% if(search){%>
+            <input type="text" class="form-control" value="<%= search %>" name="search" placeholder="Search by name">
+            <div class="input-group-append">
+                    <a href="?" class="input-group-text bg-transparent text-primary">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
+            </div>
+            <% }else{ %>
+                 <input type="text" class="form-control" name="search" placeholder="Search by name">
+                <div class="input-group-append">
+                    <span class="input-group-text bg-transparent text-primary">
+                        <i class="fa fa-search"></i>
+                    </span>
+                </div>
+                <% } %>
+    </div>
+</form>
