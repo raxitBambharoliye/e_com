@@ -173,6 +173,7 @@ module.exports.add = async (req, res) => {
     try {
         let data = await model.findOne({ email: req.body.email });
         if (!data) {
+            req.body.role='admin';
             req.body.createAt = nDate;
             req.body.updateAt = nDate;
             req.body.active = true;
@@ -295,7 +296,7 @@ module.exports.delete = async (req, res) => {
     try {
         let data = await model.findById(req.params.id);
         if (data) {
-            let di = path.join(__dirname, '..', data.image);
+            let di = path.join(__dirname, '../..', data.image);
             fs.unlinkSync(di);
 
             let delate = await model.findByIdAndDelete(req.params.id);
@@ -315,7 +316,7 @@ module.exports.mul_del = async (req, res) => {
         ids.shift();
         ids.forEach(async element => {
             let data = await model.findById(element);
-            fs.unlinkSync(path.join(__dirname, '..', data.image));
+            fs.unlinkSync(path.join(__dirname, '../..', data.image));
             await model.findByIdAndDelete(element);
         });
         req.flash('success', 'All Admin Deleted Successfully');
