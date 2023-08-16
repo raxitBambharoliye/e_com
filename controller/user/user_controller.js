@@ -408,7 +408,7 @@ module.exports.check_out_page = async (req, res) => {
         let cat_data = await category.find({ active: true });
         let sub_data = await sub_cat.find({ active: true });
         let ex_data = await ex_cat.find({ active: true });
-        let cart_data = await cart.find({ user_id: req.user.id }).populate('product_id').exec();
+        let cart_data = await cart.find({ user_id: req.user.id,status:'pending' }).populate('product_id').exec();
         let address_data = await address.find({ active: true, user_id: req.user.id }).populate("user_id");
         let search = '';
 
@@ -419,6 +419,7 @@ module.exports.check_out_page = async (req, res) => {
         var cart_count = 0;
         if (req.user) {
             cart_count = await cart.find({ user_id: req.user.id ,status:'pending' }).countDocuments();
+        
         }
         return res.render('user/check_out', {
             category: cat_data,
